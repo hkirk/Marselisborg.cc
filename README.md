@@ -42,6 +42,11 @@ After installation, run `npm install` and then run `gulp dev` which will open up
 - `gulp minify-css` minifies the compiled CSS file
 - `gulp minify-js` minifies the themes JS file
 - `gulp copy` copies dependencies from node_modules to the vendor directory
+- `gulp deploy` creates css, js and copies all needed files to public/
+
+## Deploy
+
+- `firebase deploy` deploys to firebase
 
 ## Bugs and Issues
 

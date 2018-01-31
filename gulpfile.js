@@ -69,16 +69,16 @@ gulp.task('copy', function() {
       '!**/bootstrap-theme.*',
       '!**/*.map'
     ])
-    .pipe(gulp.dest('vendor/bootstrap'))
+    .pipe(gulp.dest('vendor/bootstrap'));
 
   gulp.src(['node_modules/jquery/dist/jquery.js', 'node_modules/jquery/dist/jquery.min.js'])
-    .pipe(gulp.dest('vendor/jquery'))
+    .pipe(gulp.dest('vendor/jquery'));
 
   gulp.src(['node_modules/jquery.easing/*.js'])
-    .pipe(gulp.dest('vendor/jquery-easing'))
+    .pipe(gulp.dest('vendor/jquery-easing'));
 
   gulp.src(['node_modules/simple-line-icons/*/*'])
-    .pipe(gulp.dest('vendor/simple-line-icons'))
+    .pipe(gulp.dest('vendor/simple-line-icons'));
 
 
   gulp.src([
@@ -90,7 +90,52 @@ gulp.task('copy', function() {
       '!node_modules/font-awesome/*.json'
     ])
     .pipe(gulp.dest('vendor/font-awesome'))
-})
+});
+
+gulp.task('deploy', ['sass', 'minify-css', 'minify-js', 'copy'], function () {
+    gulp.src([
+        'index.html'
+    ])
+    .pipe(gulp.dest('public'));
+
+    gulp.src([
+        'vendor/**/*'
+    ])
+    .pipe(gulp.dest('public/vendor'));
+
+    gulp.src([
+        'js/new-age.min.js'
+    ])
+    .pipe(gulp.dest('public/js/'));
+
+    gulp.src([
+        'css/new-age.min.css'
+    ])
+    .pipe(gulp.dest('public/css/'));
+
+    gulp.src([
+        'device-mockups/device-mockups.min.css'
+    ])
+    .pipe(gulp.dest('public/device-mockups/'));
+
+    gulp.src([
+        'device-mockups/iphone_6_plus/iphone_6_plus_white_port.png'
+    ])
+    .pipe(gulp.dest('public/device-mockups/iphone_6_plus/'));
+
+    gulp.src([
+        'img/**/*'
+    ])
+    .pipe(gulp.dest('public/img/'));
+
+    gulp.src([
+        'files/**/*'
+    ])
+    .pipe(gulp.dest('public/files/'));
+
+
+
+});
 
 // Default task
 gulp.task('default', ['sass', 'minify-css', 'minify-js', 'copy']);
@@ -102,7 +147,7 @@ gulp.task('browserSync', function() {
       baseDir: ''
     },
   })
-})
+});
 
 // Dev task with browserSync
 gulp.task('dev', ['browserSync', 'sass', 'minify-css', 'minify-js'], function() {
